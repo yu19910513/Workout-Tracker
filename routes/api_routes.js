@@ -1,27 +1,28 @@
-const Workout = require("../models")
+const db = require("../models");
+const router = require("express").Router();
 
 const workoutAPI = (app) => {
-    app.get("/api/workouts", async function(req,res){
+    router.get("/api/workouts", async function(req,res){
         try {
-            const findall = await Workout.find();
+            const findall = await db.Workout.find();
             res.json(findall)
         } catch (err) {
             res.status(500).json(err)
         }
     });
 
-    app.post("/api/workouts",async function (req,res){
+    router.post("/api/workouts",async function (req,res){
         try {
-            const createone = Workout.create({});
+            const createone = db.Workout.create({});
             res.json(createone)
         } catch (err) {
             res.status(500).json(err)
         }
     });
 
-    app.get("/api/workouts/range", async function(req,res){
+    router.get("/api/workouts/range", async function(req,res){
         try {
-            const range = Workout.find();
+            const range = db.Workout.find();
             res.json(range)
         } catch (err) {
             res.status(500).json(err)
@@ -29,19 +30,19 @@ const workoutAPI = (app) => {
     });
 
 
-    app.post("/api/workouts/range",function (req,res){
+    router.post("/api/workouts/range",function (req,res){
         try {
-            const createrange = Workout.create({});
+            const createrange = db.Workout.create({});
             res.json(createrange)
         } catch (err) {
             res.status(500).json(err)
         }
     });
 
-    app.put("/api/workouts/:id", async (req,res)=>{
+    router.put("/api/workouts/:id", async (req,res)=>{
         try {
 
-            const singleUpdate = Workout.update(
+            const singleUpdate = db.Workout.findOneAndUpdate(
                 {
                     _id: mongojs.ObjectID(req.params.id)
                 },
@@ -56,4 +57,4 @@ const workoutAPI = (app) => {
     });
 };
 
-module.exports = workoutAPI
+module.exports = router
