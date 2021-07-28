@@ -1,7 +1,7 @@
 // const db = require("../models");
 // const router = require("express").Router();
 
-// const workoutAPI = (app) => {
+
 //     router.get("/api/workouts", async (req,res)=>{
 //         try {
 //             const findall = await db.Workout.find({});
@@ -55,7 +55,6 @@
 //             res.status(500).json(err)
 //         }
 //     });
-// };
 
 // module.exports = router
 
