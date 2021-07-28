@@ -11,15 +11,19 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(express.static('public'));
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/workout";
-mongoose.connect(MONGODB_URI,{
-    useNewUrlParser:true,
-    useFindAndModify:false
-})
+mongoose.connect(
+    process.env.MONGODB_URI || "mongodb://localhost/workout",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false
+    }
+  );
 
 app.use(require("./routes/api_routes.js"));
 app.use(require("./routes/home_routes.js"));
 
 app.listen(PORT,function(){
-    console.log(`App listening on Port ${PORT}`);
+    console.log(`running Port ${PORT}`);
 });
